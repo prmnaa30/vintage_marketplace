@@ -21,6 +21,10 @@
 import type { Product } from '~/types'
 import FavoriteEmpty from '~/components/favorite/FavoriteEmpty.vue'
 
+definePageMeta({
+  middleware: ['auth']
+})
+
 const favoritesStore = useFavoritesStore()
 
 const favoriteProducts = ref<Product[]>([])

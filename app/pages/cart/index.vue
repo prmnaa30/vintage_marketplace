@@ -40,6 +40,10 @@
 <script setup lang="ts">
 import CartContainer from '~/components/cart/CartContainer.vue'
 
+definePageMeta({
+  middleware: ['auth']
+})
+
 const productStore = useProductStore()
 const cartStore = useCartStore()
 

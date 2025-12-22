@@ -52,9 +52,9 @@ import ProfileDetails from '~/components/profile/ProfileDetails.vue'
 import ChangePassword from '~/components/profile/ChangePassword.vue'
 import TransactionHistory from '~/components/profile/TransactionHistory.vue'
 
-// definePageMeta({
-//   middleware: ['auth']
-// })
+definePageMeta({
+  middleware: ['auth']
+})
 
 const route = useRoute()
 const activeTab = ref(0)

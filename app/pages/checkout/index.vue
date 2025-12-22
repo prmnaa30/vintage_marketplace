@@ -131,6 +131,10 @@
 import CheckoutSuccess from '~/components/checkout/CheckoutSuccess.vue'
 import { useOrderStore } from '~/stores/order'
 
+definePageMeta({
+  middleware: ['auth']
+})
+
 const cartStore = useCartStore()
 const orderStore = useOrderStore()
 const toast = useToast()
