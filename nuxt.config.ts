@@ -22,6 +22,7 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
+    cloudinaryApiKey: process.env.CLOUDINARY_API_KEY,
     googleApplicationCredentialsJson: process.env.GOOGLE_APPLICATION_CREDENTIALS_JSON,
 
     public: {
@@ -33,8 +34,7 @@ export default defineNuxtConfig({
         messagingSenderId: process.env.NUXT_PUBLIC_VUEFIRE_MESSAGING_SENDER_ID,
         appId: process.env.NUXT_PUBLIC_VUEFIRE_APP_ID
       },
-      cloudinaryCloudName: process.env.NUXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
-      cloudinaryApiKey: process.env.NUXT_PUBLIC_CLOUDINARY_API_KEY
+      cloudinaryCloudName: process.env.NUXT_PUBLIC_CLOUDINARY_CLOUD_NAME
     }
   },
 
