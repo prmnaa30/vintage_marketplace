@@ -4,8 +4,5 @@ export default defineAppConfig({
       primary: 'green',
       neutral: 'slate'
     }
-  },
-  colorMode: {
-    preference: 'light'
   }
 })

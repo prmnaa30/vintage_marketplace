@@ -17,6 +17,10 @@ export default defineNuxtConfig({
     '@fortawesome/fontawesome-svg-core/styles.css'
   ],
 
+  ui: {
+    colorMode: false
+  },
+
   runtimeConfig: {
     googleApplicationCredentialsJson: process.env.GOOGLE_APPLICATION_CREDENTIALS_JSON,
 
