@@ -9,9 +9,11 @@ export const useProductFetch = () => {
 
     let categories: string[] = []
     if (route.query.categories) {
-      categories = typeof route.query.categories === 'string'
-        ? [route.query.categories]
-        : route.query.categories as string[]
+      if (typeof route.query.categories === 'string') {
+        categories = route.query.categories ? route.query.categories.split(',') : []
+      } else {
+        categories = route.query.categories as string[]
+      }
     }
 
     return {

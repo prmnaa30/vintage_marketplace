@@ -1,11 +1,36 @@
 <template>
-  <UContainer class="mb-12 grid">
+  <UContainer class="mb-12 grid relative">
     <ProductContainer
       container-type="Full"
       label="Items"
       :is-loading="productStore.isLoading"
       :products="productStore.products"
     />
+
+    <div class="absolute top-8 right-8 flex gap-2">
+      <ProductFilter
+        v-model="selectedCategories"
+        selection-type="multiple"
+        placeholder="Select Categories"
+        class="w-44"
+        :items="productStore.availableCategories"
+      />
+      <ProductFilter
+        v-model="selectedBrand"
+        selection-type="single"
+        placeholder="Select Brand"
+        class="w-44"
+        :items="productStore.availableBrands"
+      />
+
+      <UButton
+        label="Reset"
+        color="neutral"
+        :disabled="!selectedBrand && selectedCategories.length === 0"
+        class="cursor-pointer"
+        @click="resetFilter"
+      />
+    </div>
 
     <UButton
       v-if="productStore.products.length > 0"
@@ -21,6 +46,8 @@
 </template>
 
 <script setup lang="ts">
+import ProductFilter from '~/components/product/ProductFilter.vue'
+
 const route = useRoute()
 const router = useRouter()
 
@@ -28,11 +55,11 @@ const searchStore = useSearchStore()
 const { productStore, initializeProducts, loadMoreProducts } = useProductFetch()
 
 const searchInput = ref(route.query.q?.toString() || '')
-const _selectedBrand = computed({
+const selectedBrand = computed({
   get: () => route.query.brand?.toString() || '',
   set: val => updateFilter('brand', val)
 })
-const _selectedCategories = computed({
+const selectedCategories = computed({
   get: () => {
     const c = route.query.categories
     if (!c) return []
@@ -54,10 +81,18 @@ const updateFilter = (key: 'brand' | 'categories' | 'q', value: any) => {
   router.push({ query: newQuery })
 }
 
-const _resetFilter = () => {
+const resetFilter = () => {
+  // Reset semua filter
   searchStore.resetSearchQuery()
   searchInput.value = ''
-  router.push('/products')
+
+  // Hapus query parameter untuk brand dan categories
+  const newQuery = { ...route.query }
+  delete newQuery.brand
+  delete newQuery.categories
+  delete newQuery.q
+
+  router.push({ path: '/products', query: newQuery })
 }
 
 // Watch for route changes and fetch products accordingly

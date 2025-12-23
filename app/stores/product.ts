@@ -28,8 +28,8 @@ export const useProductStore = defineStore('product', {
     relatedProducts: [] as Product[],
     randomProducts: [] as Product[],
 
-    availableBrands: [] as unknown[],
-    availableCategories: [] as unknown[],
+    availableBrands: [] as string[],
+    availableCategories: [] as string[],
 
     isLoading: false,
     error: null as string | null,
